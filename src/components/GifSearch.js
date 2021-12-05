@@ -6,16 +6,22 @@ export default class GifSearch extends Component {
   }
 
   handleChange = (event) => {
-    event.preventDefault();
     this.setState({
-      [event.target.id]: event.target.value
+      query: event.target.value
     })
   }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.props.handleSubmission(this.state.query)
+  }
+
   render() {
     return (
-      <form onSubmit={this.props.handleSubmission(this.state.query)}>
+      <form onSubmit={this.handleSubmit}>
         <label>Search GIPHY: </label>
-        <input type="text" id="query" onChange={this.handleChange}></input>
+        <input type="text" onChange={this.handleChange}></input>
+        <button type="submit">Submit</button>
       </form>
     )
   }
