@@ -7,9 +7,8 @@ export default class GifListContainer extends Component {
     images: []
   }
 
-  handleSubmit = (event) => {
-    event.preventDefault();
-    fetch(`https://api.giphy.com/v1/gifs/search?api_key=EFCoL2Rrf20fmXIcRXeBYbctQDIDHlfv&q=${event.target.value}dog&limit=3&offset=0&rating=g&lang=en`)
+  handleSubmit = (query) => {
+    fetch(`https://api.giphy.com/v1/gifs/search?api_key=EFCoL2Rrf20fmXIcRXeBYbctQDIDHlfv&q=${query}dog&limit=3&offset=0&rating=g&lang=en`)
       .then(resp => resp.json())
       .then(json => {
         this.setState({
@@ -31,7 +30,7 @@ export default class GifListContainer extends Component {
   render() {
     return (
       <div>
-        <GifSearch onSumbit={this.handleSubmit} />
+        <GifSearch handleSubmission={this.handleSubmit} />
         <GifList images={this.state.images}/>
       </div>
     )
